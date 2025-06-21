@@ -26,11 +26,8 @@ AWS Technical Essentials 는 AWS 서비스와 기술에 대한 이해를 제공�
 2. 비개발 직군의 IT 관련 종사자</br>
 	•	프로젝트 매니저(PM), IT 기획자, 영업, 마케팅 등</br>
 	•	AWS 기반 프로젝트 이해를 위해 필요한 기초 지식 습득</br>
-3. 클라우드 전환을 고려 중인 기업의 임직원</br>
-	•	기존 온프레미스에서 클라우드로 전환을 고려 중인 조직의 관계자</br>
-	•	클라우드 기술 이해를 바탕으로 전략 수립이 필요한 관리자</br>
-4. 향후 AWS 자격증(예: Cloud Practitioner, Solutions Architect) 준비 예정자</br>
+3. 향후 AWS 자격증(예: Cloud Practitioner, Solutions Architect) 준비 예정자</br>
 	•	자격증 준비 전 사전 지식 습득 목적</br>
-5. 개발자 및 시스템 관리자(초급)</br>
+4. 개발자 및 시스템 관리자(초급)</br>
 	•	AWS 서비스 구조를 이해하고 실습을 통해 서비스 생성 및 설정을 경험하고자 하는 인력</br>
 
