@@ -1,12 +1,10 @@
-## **Step-by-Step Labs**
-
-### **Lab 1: IAM 사용자 및 그룹 생성**
+# **Lab 1: IAM 사용자 및 그룹 생성**
 
 #### **Objective:**
 
-- Create IAM users and groups.
-- Assign permissions using AWS Managed Policies.
-- Test access by logging in as the new users.
+- IAM 사용자 및 그룹 생성
+- AWS 관리 정책을 사용하여 권한을 할당
+- 신규 사용자로 로그인하여 액세스를 테스트
 
 #### **Steps:**
 
