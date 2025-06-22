@@ -30,4 +30,19 @@ AWS Technical Essentials 는 AWS 서비스와 기술에 대한 이해를 제공�
 	•	자격증 준비 전 사전 지식 습득 목적</br>
 4. 개발자 및 시스템 관리자(초급)</br>
 	•	AWS 서비스 구조를 이해하고 실습을 통해 서비스 생성 및 설정을 경험하고자 하는 인력</br>
+</br>
 
+## 강사 소개
+- System and Infrastructure Geek 
+- 2025 AWS All Star(AWS Golden Jacket of Certification)
+- 2024 Meister(Infra Architecture)
+- 2024 한국정보통신진흥협회(KAIT) 리눅스마스터 2급 공인시험 출제
+- 2023 Kubernetes, Open Infra Community Day(Contributer)
+- 2015 ~ Present 사내강사
+</br>
+
+## Reference
+- LinkdIn : https://www.linkedin.com/in/kim-donghyun0916/
+- Credly : https://www.credly.com/users/kim-donghyun0916
+- Facebook : ClusterLabs Korea(https://www.facebook.com/groups/clusterlabskorea)
+- TiStory : https://rhlinux.tistory.com
