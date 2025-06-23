@@ -1,7 +1,7 @@
-# 실습: AWS MySQL RDS를 시작하고 Amazon Linux EC2 인스턴스와 연결
+# 실습: MySQL DB 인스턴스 생성 및 해당 인스턴스에 연결
 이 실습은 AWS MySQL RDS 인스턴스를 시작하고 Amazon Linux EC2 인스턴스에 연결하는 과정을 안내합니다. 이 실습이 끝나면 EC2 인스턴스에서 액세스할 수 있는 MySQL RDS 인스턴스를 갖게 됩니다.
 
-![image](https://github.com/user-attachments/assets/826fba50-42b1-4031-9d9a-227778bf401f)
+![image](https://github.com/user-attachments/assets/a9833175-5dae-4aa7-b935-ad69b556d073)
 </br>
 
 
