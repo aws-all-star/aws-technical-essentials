@@ -1,9 +1,10 @@
 # **연습 : 다른 운영 체제에 AWS CLI를 설치하는 방법 익히기**
 AWS 명령줄 인터페이스(CLI)를 사용하면 명령줄에서 AWS 서비스와 상호 작용할 수 있습니다. Linux, macOS 및 Windows와 같은 다양한 운영 체제에 AWS CLI를 설치하고 구성할 수 있습니다.
-</br>
+</br></br>
 
-## **1. 다른 운영 체제에 AWS CLI 설치**
-### **1.1 리눅스에 AWS CLI 설치하기**
+
+## 1. 다른 운영 체제에 AWS CLI 설치
+### **01. 리눅스에 AWS CLI 설치**
 
 1. **AWS CLI 설치 프로그램 다운로드**:
    
@@ -27,10 +28,9 @@ AWS 명령줄 인터페이스(CLI)를 사용하면 명령줄에서 AWS 서비스
    ```bash
    aws --version
    ```
+</br>
 
----
-
-#### **1.2 macOS에 AWS CLI 설치하기**
+### **02. macOS에 AWS CLI 설치**
 
 1. **AWS CLI 설치 프로그램 다운로드**:
    
@@ -49,10 +49,9 @@ AWS 명령줄 인터페이스(CLI)를 사용하면 명령줄에서 AWS 서비스
    ```bash
    aws --version
    ```
+</br>
 
----
-
-#### **1.3 Windows에서 AWS CLI 설치**
+## **03. Windows에서 AWS CLI 설치**
 
 1. **설치 프로그램 다운로드**:
    Windows용 AWS CLI MSI 설치 프로그램을 다운로드하십시오. [here](https://awscli.amazonaws.com/AWSCLIV2.msi).
@@ -66,7 +65,6 @@ AWS 명령줄 인터페이스(CLI)를 사용하면 명령줄에서 AWS 서비스
    aws --version
    ```
 
----
 </br></br>
 
 
@@ -86,12 +84,15 @@ AWS CLI를 설치한 후 **AWS Credentials** 및 **Region**으로 구성해야 �
    - **Default Region Name**: Enter your region (e.g., `us-west-2` or `ap-south-2`).
    - **Default Output Format**: Choose the output format (`json`, `text`, or `table`).
 
-   Example:
+   **예제**:
    ```bash
    AWS Access Key ID [None]: AKIAIOSFODNN7EXAMPLE
    AWS Secret Access Key [None]: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
    Default region name [None]: us-west-2
    Default output format [None]: json
    ```
+
+</br></br>
+
 
 **참고**: **IAM** 아래의 AWS 관리 콘솔에서 액세스 키를 생성할 수 있습니다.
