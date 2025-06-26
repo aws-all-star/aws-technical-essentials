@@ -96,3 +96,5 @@ AWS CLI를 설치한 후 **AWS Credentials** 및 **Region**으로 구성해야 �
 
 
 **참고**: **IAM** 아래의 AWS 관리 콘솔에서 액세스 키를 생성할 수 있습니다.
+https://docs.aws.amazon.com/cli/latest/
+
