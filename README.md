@@ -42,7 +42,5 @@ AWS Technical Essentials 는 AWS 서비스와 기술에 대한 이해를 제공�
 </br>
 
 ## Reference
-- LinkdIn : https://www.linkedin.com/in/kim-donghyun0916/
 - Credly : https://www.credly.com/users/kim-donghyun0916
 - Facebook : ClusterLabs Korea(https://www.facebook.com/groups/clusterlabskorea)
-- TiStory : https://rhlinux.tistory.com
