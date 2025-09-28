@@ -33,7 +33,7 @@ AWS Technical Essentials 는 AWS 서비스와 기술에 대한 이해를 제공�
 </br>
 
 ## 강사 소개
-- System and Infrastructure Geek 
+- System and Infrastructure Geek, Senior Linux Engineer with 15+ years of experience
 - 2025 AWS All Star(AWS Golden Jacket of Certification)
 - 2024 Meister(Infra Architecture)
 - 2024 한국정보통신진흥협회(KAIT) 리눅스마스터 2급 공인시험 출제
@@ -44,3 +44,4 @@ AWS Technical Essentials 는 AWS 서비스와 기술에 대한 이해를 제공�
 ## Reference
 - Credly : https://www.credly.com/users/kim-donghyun0916
 - Facebook : ClusterLabs Korea(https://www.facebook.com/groups/clusterlabskorea)
+- LinkdIn : www.linkedin.com/in/kim-donghyun0916
