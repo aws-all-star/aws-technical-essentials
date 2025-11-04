@@ -8,10 +8,10 @@
 1. **IAM 그룹 생성**
    - **IAM 대시보드**로 이동합니다.
    - **그룹** > **새 그룹 만들기**를 클릭하세요.
-   - **그룹 이름**: `Developers`
+   - **그룹 이름**: `operator`
 
    - **정책 첨부**:
-      - `AmazonEC2FullAccess`와 `AmazonS3FullAccess`를 선택
+      - `AdministratorAccess`와 `AmazonSSMManagedEC2InstanceDefaultPolicy`를 선택
 
    - **그룹 만들기**를 클릭합니다.
 
@@ -20,7 +20,6 @@
    - **사용자** > **사용자 추가**로 이동합니다.
    - **사용자 이름**: `alice`, `bob`.
    - **접근 유형**:
-     - **Programmatic access**(API, CLI, SDK용)를 확인하세요.
       - **AWS Management Console access**를 확인하세요.
 
 - **콘솔 비밀번호**:
@@ -29,10 +28,12 @@
 
 3. **사용자를 그룹에 추가**
    - **Permissions** 페이지에서 **Add user to group**를 선택합니다.
-   - `Developers` 그룹을 선택하세요.
+   - `operator` 그룹을 선택하세요.
    - **Next: Tags**(선택 사항)를 클릭한 다음 **Next: Review**를 클릭하고 **Create User**를 클릭합니다.
 
-4. **자격 증명 검색**
+4. **사용자 접근 키 생성**
+   - **Create access key** 를 선택한 후 활용 선택에서 **Command Line Interface(CLI)** 선택한 후 **다음** 을 선택하여 진행하도록 합니다.
+   **자격 증명 검색**
    - 사용자의 액세스 키와 비밀번호가 포함된 `.csv` 파일을 다운로드하세요.
 
 - **참고**: 자격 증명을 안전하게 저장하십시오.
@@ -40,109 +41,8 @@
 5. **사용자 접근 테스트**
    - AWS 콘솔에서 로그아웃합니다.
    - `alice`의 자격 증명으로 **IAM 사용자 로그인 URL**을 사용하여 로그인합니다.
-   - `alice`가 EC2 및 S3 서비스에 액세스할 수 있는지 확인하십시오.
 
-</br></br>
-
-
-# **실습 2: IAM 역할 생성 및 EC2 인스턴스에 할당하기**
-## **구성목표:**
-- EC2 인스턴스가 S3에 접근할 수 있도록 하는 IAM 역할을 생성합니다.
-- 이 역할로 EC2 인스턴스를 실행합니다.
-- 액세스 키를 사용하지 않고 EC2 인스턴스에서 S3에 액세스합니다.
-
-## **실행단계:**
-1. **IAM 역할 생성**
-   - **IAM Dashboard**에서 **Roles** > **Create Role**으로 이동합니다.
-   - **Select Type of Trusted Entity**: **AWS Service**를 선택합니다.
-   - **Common Use Cases**: **EC2**를 선택하세요.
-
-   - **Next: Permissions**을 클릭하십시오.
-   - **정책 첨부**:
-      - `AmazonS3ReadOnlyAccess`를 선택하세요.
-   - **Next: Tags**(선택 사항)를 클릭한 다음 **Next: Review**를 클릭합니다.
-   - **Role Name**: `EC2S3ReadOnlyRole`.
-   - **Create Role**을 클릭합니다.
-
-2. **IAM 역할로 EC2 인스턴스를 런칭합니다**
-   - **EC2 Dashboard** > **Instances** > **Launch Instance**로 이동합니다.
-   - **AMI**: Amazon Linux 2 AMI를 선택하세요.
-   - **인스턴스 유형**: `t2.micro`를 선택하세요.
-   - **인스턴스 세부 정보 구성**:
-      - **IAM 역할** 드롭다운에서 `EC2S3ReadOnlyRole`을 선택합니다.
-   - **보안 그룹 구성**:
-      - 사용자 IP에서 **SSH** 접근을 허용하세요.
-   - **Review and Launch** 클릭합니다.
-
-3. **EC2 인스턴스에서 S3 접근 테스트합니다.**
-   - SSH를 통해 EC2 인스턴스에 연결합니다.
-
-     ```bash
-     ssh -i /path/to/your-key.pem ec2-user@your-instance-public-ip
-     ```
-
-   - S3 버킷 목록:
-
-     ```bash
-     aws s3 ls
-     ```
-
-- **참고**: 액세스 키를 구성하지 않고 S3 버킷 목록을 볼 수 있습니다.
-
-</br></br>
-
-
-# **실습 3: Implementing IAM Best Practices**
-
-## **구성목표:**
-- IAM 사용자에 대해 MFA를 활성화합니다.
-- 강력한 암호 정책을 설정하세요.
-- 사용자 관리 정책을 만듭니다.
-
-## **실행단계:**
-
-1. **IAM 사용자를 위한 MFA 활성화**
-   - **IAM Dashboard**에서 **Users**로 이동합니다.
-   - 사용자 `alice`를 선택하세요.
-   - **Security Credentials** 탭으로 이동합니다.
-   - **Assigned MFA device**(할당된 MFA 기기) 아래에서 **Manage MFA**(MFA 관리)를 클릭합니다.
-   - **Virtual MFA device**를 선택합니다.
-   - 인증 앱(예: Google Authenticator)을 사용하여 QR 코드를 스캔하세요.
-   - 앱에서 두 개의 연속적인 MFA 코드를 입력합니다.
-   - **Assign MFA**를 클릭합니다.
-
-2. **암호 정책 설정**
-   - **IAM Dashboard**에서 **Account Settings**을 선택합니다.
-   - **Password Policy** 아래에서 **Set password policy**을 클릭합니다.
-   - 설정 구성:
-     - 1개 이상의 대문자가 필요
-     - 1개 이상의 숫자가 필요
-     - 1개 이상의 영숫자가 아닌 문자가 필요
-     - 최소 비밀번호 길이: 12자
-     - 비밀번호 만료 활성화(예: 90일마다)
-   - **Apply password policy**을 클릭하세요
-
-3. **고객 관리 정책 생성**
-   - **Policies** > **Create Policy**로 이동합니다.
-   - **Visual Editor** 또는 **JSON**: Visual Editor를 사용하세요.
-   - **서비스**: **EC2**를 선택합니다.
-   - **작업**: `StartInstances` 및 `StopInstances`와 같은 특정 작업을 선택하십시오.
-   - **Resources**: 리소스를 지정하거나 **All resources**를 선택합니다.
-   - **Review Policy**를 클릭합니다.
-   - **Name**: `EC2StartStopPolicy`.
-   - **Description**: EC2 인스턴스를 시작하고 중지할 수 있습니다.
-   - **Create Policy**을 클릭합니다.
-
-4. **사용자 또는 그룹에 정책 첨부**
-   - **Users** 또는 **Groups**으로 이동합니다.
-   - `alice` 또는 `Developers` 그룹을 선택하세요.
-   - **Permissions** 탭으로 이동합니다.
-   - **Add Permissions** > **Attach existing policies directly**를 클릭합니다.
-   - `EC2StartStopPolicy`를 검색하세요.
-   - 선택하고 **Add Permissions**를 클릭합니다.
-
-</br></br>
-
+  
 ## **결론**
 AWS IAM은 AWS 인프라 서비스를 보호하는 데 중요한 역할을 하는 기본 서비스입니다. 사용자, 그룹, 역할 및 정책을 효과적으로 관리하고 모범 사례를 따르면 리소스가 보호되고 사용자가 작업을 수행할 수 있는 적절한 액세스 권한이 있는지 확인할 수 있습니다.
 
