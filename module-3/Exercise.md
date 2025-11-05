@@ -178,6 +178,37 @@ aws ec2 create-route --route-table-id rtb-0ab4a61ef63cd5556 --destination-cidr-b
 ```
 <br/>
 
+```sh
+aws ec2 authorize-security-group-ingress --group-id $SG_ID --protocol tcp --port 22 --cidr 0.0.0.0/0
+```
+<br/>
+
+{
+    "Return": true,
+    "SecurityGroupRules": [
+        {
+            "SecurityGroupRuleId": "sgr-0eb655ef934a820ed",
+            "GroupId": "sg-016083c1c7587afb6",
+            "GroupOwnerId": "533267279970",
+            "IsEgress": false,
+            "IpProtocol": "tcp",
+            "FromPort": 22,
+            "ToPort": 22,
+            "CidrIpv4": "0.0.0.0/0",
+            "SecurityGroupRuleArn": "arn:aws:ec2:ap-northeast-2:533267279970:security-group-rule/sgr-0eb655ef934a820ed"
+        }
+    ]
+}
+
+<br/>
+
+```sh
+aws ec2 authorize-security-group-ingress --group-id $SG_ID --protocol icmp --port -1 --source-group $SG_ID
+```
+<br/>
+```sh
+
+
 🎯 비용·가용성 관점
 - NAT GW는 시간·트래픽 요금이 있으므로, S3/DynamoDB 등은 VPC Endpoint(아래 참조) 로 우회해 NAT 비용을 줄일 수 있습니다.
 - IGW는 비용이 없습니다(데이터 전송료는 별도)
