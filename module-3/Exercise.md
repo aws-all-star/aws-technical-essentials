@@ -108,7 +108,7 @@ Network ACL(NACL) 은 서브넷 단위, 무상태(Stateless). 인바운드·아�
 
 예시) 보안 그룹 생성
 ```sh
-aws ec2 create-security-group \
+$ aws ec2 create-security-group \
    --group-name MyWebServerSG \
    --description "Security Group for Web Server" \
    --vpc-id vpc-0cbbce3dab3abdb53
@@ -135,7 +135,7 @@ NAT Gateway은 Private Subnet에 있는 인스턴스가 밖으로 나가기만 �
 예시) Internet Gateway 생성
 
 ```sh
-aws ec2 create-internet-gateway \
+$ aws ec2 create-internet-gateway \
   --tag-specifications 'ResourceType=internet-gateway,Tags=[{Key=Name,Value=MyInternetGateway}]'
 ```
 
