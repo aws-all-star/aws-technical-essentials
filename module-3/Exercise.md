@@ -136,7 +136,7 @@ Internet Gateway은 외부에서 들어오고(인바운드), 내부에서 나갈
 NAT Gateway은 Private Subnet에 있는 인스턴스가 밖으로 나가기만 하게 해 줍니다(예: OS 업데이트, 패키지 다운로드). 외부에서 직접 들어올 수는 없습니다. 고가용성을 위해 AZ마다 배치하고, 해당 AZ의 프라이빗 서브넷은 같은 AZ의 NAT GW 를 사용하도록 라우팅하는 것이 모범 사례입니다.
 
 <br/>
-**예시) Internet Gateway생성**
+예시) Internet Gateway 생성
 
 ```sh
 $ aws ec2 create-internet-gateway \
@@ -209,6 +209,7 @@ aws ec2 associate-route-table --subnet-id <subnet-0dce4429e653b1c32> --route-tab
     "AssociationState": {
         "State": "associated"
     }
+}
 ```
 <br/>
 
