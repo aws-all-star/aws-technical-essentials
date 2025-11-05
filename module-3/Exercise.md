@@ -17,7 +17,9 @@ Private Subnet: 내부 전용 DB서버나 백엔드 시스템을 배치
 
 여기서 “/24”는 256개 IP(실사용 약 251개)를 의미합니다. 너무 촘촘하게 잡으면 나중에 확장이 어렵고, 너무 넓게 잡으면 관리가 난해합니다. 초기에 성장 여지를 고려해 설계하는 습관이 중요합니다.
 이처럼 VPC는 네트워크 구성을 안전하게 분리하고 세밀하게 제어할 수 있게 해줍니다.
-<br/>
+
+<br/><br/>
+
 예시) VPC 생성
 ```sh
 $ aws ec2 create-vpc \
@@ -46,6 +48,7 @@ $ aws ec2 create-vpc \
 <br/>
 
 **(2) 서브넷(Subnet)과 라우팅 테이블(Routing Table): 패킷의 길 안내서**
+<br/>
 AWS Routing Table(라우팅 테이블)은 AWS 네트워크에서 패킷이 이동할 경로를 결정하는 지도와 같은 역할을 합니다.
 즉, “이 트래픽은 어디로 보내야 하는가?” 를 정의하는 규칙 집합입니다.
 
@@ -126,7 +129,7 @@ $ aws ec2 create-security-group \
 ```
 <br/>
 
-**(4) 인터넷 출입문: IGW vs NAT Gateway**
+예시) 인터넷 출입문: IGW vs NAT Gateway
 <br/>
 Internet Gateway은 외부에서 들어오고(인바운드), 내부에서 나갈(아웃바운드) 수 있는 ‘정문’입니다. 퍼블릭 서브넷에 놓인 EC2가 퍼블릭 IP/Elastic IP 를 가지고 있고, 라우트가 IGW를 향하면 인터넷과 직접 통신합니다.
 NAT Gateway은 Private Subnet에 있는 인스턴스가 밖으로 나가기만 하게 해 줍니다(예: OS 업데이트, 패키지 다운로드). 외부에서 직접 들어올 수는 없습니다. 고가용성을 위해 AZ마다 배치하고, 해당 AZ의 프라이빗 서브넷은 같은 AZ의 NAT GW 를 사용하도록 라우팅하는 것이 모범 사례입니다.
@@ -153,8 +156,9 @@ $ aws ec2 create-internet-gateway \
 ```
 <br/>
 
+예시) 경로 테이블(route table)을 생성
 ```sh
-aws ec2 create-route-table --vpc-id vpc-03ac1f56988402f4c --output text --query 'RouteTable.RouteTableId' --tag-specifications 'ResourceType=route-table,Tags=[{Key=Name,Value=MyRouteTable}]'
+aws ec2 create-route-table --vpc-id <vpc-03ac1f56988402f4c> --output text --query 'RouteTable.RouteTableId' --tag-specifications 'ResourceType=route-table,Tags=[{Key=Name,Value=MyRouteTable}]'
 ```
 <br/>
 
@@ -166,23 +170,44 @@ rtb-0ab4a61ef63cd5556
 ```
 <br/>
 
+예시) Public subnet 에서 Public IP 자동 할당
 ```sh
-aws ec2 attach-internet-gateway --internet-gateway-id igw-04f06e17e9bbd041d --vpc-id vpc-03ac1f56988402f4c
+aws ec2 attach-internet-gateway --internet-gateway-id <igw-04f06e17e9bbd041d> --vpc-id <vpc-03ac1f56988402f4c>
 
 ```
-
 <br/>
+
+예시) 인터넷 게이트웨이에 추가
 
 ```sh
 aws ec2 create-route --route-table-id rtb-0ab4a61ef63cd5556 --destination-cidr-block 0.0.0.0/0 --gateway-id igw-04f06e17e9bbd041d
 ```
 <br/>
 
+예시) Public subnet을 Public 경로 테이블(route table)과 연결
+```sh
+aws ec2 associate-route-table --subnet-id subnet-0dce4429e653b1c32 --route-table-id rtb-0ab4a61ef63cd5556
+```
+<br/>
+
+출력 예시
+<br/>
+```sh
+{
+    "AssociationId": "rtbassoc-04518f2934655113a",
+    "AssociationState": {
+        "State": "associated"
+    }
+```
+<br/>
+
+예시) 외부에서 접속되도록 22번 포트 오픈
 ```sh
 aws ec2 authorize-security-group-ingress --group-id $SG_ID --protocol tcp --port 22 --cidr 0.0.0.0/0
 ```
 <br/>
 
+```sh
 {
     "Return": true,
     "SecurityGroupRules": [
@@ -199,6 +224,7 @@ aws ec2 authorize-security-group-ingress --group-id $SG_ID --protocol tcp --port
         }
     ]
 }
+```
 
 <br/>
 
@@ -206,7 +232,6 @@ aws ec2 authorize-security-group-ingress --group-id $SG_ID --protocol tcp --port
 aws ec2 authorize-security-group-ingress --group-id $SG_ID --protocol icmp --port -1 --source-group $SG_ID
 ```
 <br/>
-```sh
 
 
 🎯 비용·가용성 관점
