@@ -114,7 +114,7 @@ Network ACL(NACL) 은 서브넷 단위, 무상태(Stateless). 인바운드·아�
 $ aws ec2 create-security-group \
    --group-name MyWebServerSG \
    --description "Security Group for Web Server" \
-   --vpc-id vpc-0cbbce3dab3abdb53
+   --vpc-id <vpc-0cbbce3dab3abdb53>
 ```
 
 <br/>
