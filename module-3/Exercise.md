@@ -20,7 +20,8 @@ Private Subnet: 내부 전용 DB서버나 백엔드 시스템을 배치
 
 <br/><br/>
 
-예시) VPC 생성
+**예시) VPC 생성**
+
 ```sh
 aws ec2 create-vpc \
    --cidr-block 10.10.0.0/16 \
@@ -61,7 +62,7 @@ AWS에서 EC2 인스턴스나 서비스가 데이터를 전송하면, 그 트래
 - 서비스 간 내부 통신: 대상 Prefix가 같은 VPC CIDR이면 로컬 라우트가 자동 존재
 <br/>
 
-예시) 퍼블릭 서브넷 생성
+**예시) 퍼블릭 서브넷 생성**
 
 ```sh
 $ aws ec2 create-subnet \
@@ -109,7 +110,7 @@ SG끼리 참조(출처를 다른 SG로 지정) 하면 동적으로 스케일되�
 Network ACL(NACL) 은 서브넷 단위, 무상태(Stateless). 인바운드·아웃바운드를 각각 허용/거부 룰로 정의합니다. 세밀한 거부(Deny) 룰이나 기본 차단선으로 사용합니다.
 <br/><br/>
 
-예시) 보안 그룹 생성
+**예시) 보안 그룹 생성**
 ```sh
 $ aws ec2 create-security-group \
    --group-name MyWebServerSG \
@@ -135,7 +136,7 @@ Internet Gateway은 외부에서 들어오고(인바운드), 내부에서 나갈
 NAT Gateway은 Private Subnet에 있는 인스턴스가 밖으로 나가기만 하게 해 줍니다(예: OS 업데이트, 패키지 다운로드). 외부에서 직접 들어올 수는 없습니다. 고가용성을 위해 AZ마다 배치하고, 해당 AZ의 프라이빗 서브넷은 같은 AZ의 NAT GW 를 사용하도록 라우팅하는 것이 모범 사례입니다.
 
 <br/>
-예시) Internet Gateway 생성
+**예시) Internet Gateway생성**
 
 ```sh
 $ aws ec2 create-internet-gateway \
@@ -156,9 +157,9 @@ $ aws ec2 create-internet-gateway \
 ```
 <br/>
 
-예시) 경로 테이블(route table)을 생성
+**예시) 경로 테이블(route table)을 생성**
 ```sh
-aws ec2 create-route-table --vpc-id <vpc-03ac1f56988402f4c> \
+$ aws ec2 create-route-table --vpc-id <vpc-03ac1f56988402f4c> \
 --output text --query 'RouteTable.RouteTableId' --tag-specifications 'ResourceType=route-table,Tags=[{Key=Name,Value=MyRouteTable}]'
 ```
 <br/>
@@ -171,23 +172,32 @@ rtb-0ab4a61ef63cd5556
 ```
 <br/>
 
-예시) Public subnet 에서 Public IP 자동 할당
+**예시) Public subnet 에서 Public IP 자동 할당**
 ```sh
-aws ec2 attach-internet-gateway --internet-gateway-id <igw-04f06e17e9bbd041d> --vpc-id <vpc-03ac1f56988402f4c>
+$ aws ec2 attach-internet-gateway --internet-gateway-id <igw-04f06e17e9bbd041d> --vpc-id <vpc-03ac1f56988402f4c>
 
 ```
 <br/>
 
-예시) 인터넷 게이트웨이에 추가
+**예시) 인터넷 게이트웨이에 추가**
 
 ```sh
-aws ec2 create-route --route-table-id rtb-0ab4a61ef63cd5556 --destination-cidr-block 0.0.0.0/0 --gateway-id igw-04f06e17e9bbd041d
+$ aws ec2 create-route --route-table-id <rtb-0ab4a61ef63cd5556> \ 
+--destination-cidr-block 0.0.0.0/0 --gateway-id <igw-04f06e17e9bbd041d>
 ```
 <br/>
 
-예시) Public subnet을 Public 경로 테이블(route table)과 연결
+출력 예시
 ```sh
-aws ec2 associate-route-table --subnet-id subnet-0dce4429e653b1c32 --route-table-id rtb-0ab4a61ef63cd5556
+{
+    "Return": true
+}
+```
+<br/>
+
+**예시) Public subnet을 Public 경로 테이블(route table)과 연결**
+```sh
+aws ec2 associate-route-table --subnet-id <subnet-0dce4429e653b1c32> --route-table-id <rtb-0ab4a61ef63cd5556>
 ```
 <br/>
 
@@ -202,12 +212,15 @@ aws ec2 associate-route-table --subnet-id subnet-0dce4429e653b1c32 --route-table
 ```
 <br/>
 
-예시) 외부에서 접속되도록 22번 포트 오픈
+**예시) 외부에서 접속되도록 22번 포트 오픈**
 ```sh
-aws ec2 authorize-security-group-ingress --group-id $SG_ID --protocol tcp --port 22 --cidr 0.0.0.0/0
+$ aws ec2 authorize-security-group-ingress --group-id <sg-016083c1c7587afb6> \ 
+--protocol tcp --port 22 --cidr 0.0.0.0/0
 ```
 <br/>
 
+
+출력 예시
 ```sh
 {
     "Return": true,
@@ -230,7 +243,8 @@ aws ec2 authorize-security-group-ingress --group-id $SG_ID --protocol tcp --port
 <br/>
 
 ```sh
-aws ec2 authorize-security-group-ingress --group-id $SG_ID --protocol icmp --port -1 --source-group $SG_ID
+$ aws ec2 authorize-security-group-ingress --group-id <sg-016083c1c7587afb6> \ 
+--protocol icmp --port -1 --source-group <sg-016083c1c7587afb6>
 ```
 <br/>
 
