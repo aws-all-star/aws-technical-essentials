@@ -17,14 +17,14 @@ ssh -i /path/to/your-key.pem ec2-user@your-instance-public-dns
 
 1. 다음 명령을 실행합니다.
 ```bash
-sudo yum update -y
+sudo dnf update -y
 ```
 
 ### **3단계: 아파치 설치(httpd)**
 
 1. 다음 명령을 실행하여 아파치를 설치하세요:
 ```bash
-sudo yum install httpd -y
+sudo dnf install httpd -y
 ```
 
 ### **4단계: 아파치 웹 서버 시작**
