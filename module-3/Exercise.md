@@ -153,6 +153,30 @@ $ aws ec2 create-internet-gateway \
 ```
 <br/>
 
+```sh
+aws ec2 create-route-table --vpc-id vpc-03ac1f56988402f4c --output text --query 'RouteTable.RouteTableId' --tag-specifications 'ResourceType=route-table,Tags=[{Key=Name,Value=MyRouteTable}]'
+```
+<br/>
+
+출력 예시
+<br/>
+
+```sh
+rtb-0ab4a61ef63cd5556
+```
+<br/>
+
+```sh
+aws ec2 attach-internet-gateway --internet-gateway-id igw-04f06e17e9bbd041d --vpc-id vpc-03ac1f56988402f4c
+
+```
+
+<br/>
+
+```sh
+aws ec2 create-route --route-table-id rtb-0ab4a61ef63cd5556 --destination-cidr-block 0.0.0.0/0 --gateway-id igw-04f06e17e9bbd041d
+```
+<br/>
 
 🎯 비용·가용성 관점
 - NAT GW는 시간·트래픽 요금이 있으므로, S3/DynamoDB 등은 VPC Endpoint(아래 참조) 로 우회해 NAT 비용을 줄일 수 있습니다.
