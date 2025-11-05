@@ -22,7 +22,7 @@ Private Subnet: 내부 전용 DB서버나 백엔드 시스템을 배치
 
 예시) VPC 생성
 ```sh
-$ aws ec2 create-vpc \
+aws ec2 create-vpc \
    --cidr-block 10.10.0.0/16 \
    --tag-specifications "ResourceType=vpc,Tags=[{Key=Name,Value=MyVPC}]"
 ```
@@ -158,7 +158,8 @@ $ aws ec2 create-internet-gateway \
 
 예시) 경로 테이블(route table)을 생성
 ```sh
-aws ec2 create-route-table --vpc-id <vpc-03ac1f56988402f4c> --output text --query 'RouteTable.RouteTableId' --tag-specifications 'ResourceType=route-table,Tags=[{Key=Name,Value=MyRouteTable}]'
+aws ec2 create-route-table --vpc-id <vpc-03ac1f56988402f4c> \
+--output text --query 'RouteTable.RouteTableId' --tag-specifications 'ResourceType=route-table,Tags=[{Key=Name,Value=MyRouteTable}]'
 ```
 <br/>
 
