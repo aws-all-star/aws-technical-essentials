@@ -157,6 +157,13 @@ $ aws ec2 create-internet-gateway \
 ```
 <br/>
 
+**예시) Public IP가 자동으로 서브넷에 할당**
+
+```sh
+$ aws ec2 modify-subnet-attribute --subnet-id <subnet-003da1a2b49cd770c> --map-public-ip-on-launch
+```
+<br/>
+
 **예시) 경로 테이블(route table)을 생성**
 ```sh
 $ aws ec2 create-route-table --vpc-id <vpc-03ac1f56988402f4c> \
